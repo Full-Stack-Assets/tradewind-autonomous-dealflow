@@ -1,0 +1,21 @@
+{
+  "features": [
+    {
+      "attributes": {
+        "OBJECTID": 101,
+        "LOC_ID": "NB-000101",
+        "SITE_ADDR": "42 Acushnet Avenue",
+        "CITY": "New Bedford",
+        "ZIP": "02740",
+        "TOTAL_VAL": 315000,
+        "OWNER1": "EXAMPLE OWNER",
+        "OWN_STATE": "FL",
+        "USE_CODE": "1010",
+        "ZONING": "RA",
+        "YEAR_BUILT": 1925,
+        "LS_PRICE": 185000,
+        "LS_DATE": 1704067200000
+      }
+    }
+  ]
+}

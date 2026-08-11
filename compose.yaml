@@ -1,0 +1,77 @@
+services:
+  postgres:
+    image: postgis/postgis:16-3.4
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:?POSTGRES_DB is required}
+      POSTGRES_USER: ${POSTGRES_USER:?POSTGRES_USER is required}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  migrate:
+    build: .
+    command: npm run migrate
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: "no"
+
+  api:
+    build: .
+    command: npm run api
+    restart: unless-stopped
+    environment: &tradewind_environment
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      PORT: 3000
+      TRADEWIND_API_TOKEN: ${TRADEWIND_API_TOKEN}
+      TRADEWIND_PROVIDER_MODE: ${TRADEWIND_PROVIDER_MODE}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      ELEVENLABS_API_KEY: ${ELEVENLABS_API_KEY}
+      ELEVENLABS_AGENT_ID: ${ELEVENLABS_AGENT_ID}
+      ELEVENLABS_PHONE_NUMBER_ID: ${ELEVENLABS_PHONE_NUMBER_ID}
+      ENRICHMENT_API_URL: ${ENRICHMENT_API_URL}
+      ENRICHMENT_API_KEY: ${ENRICHMENT_API_KEY}
+      SIGNATURE_API_URL: ${SIGNATURE_API_URL}
+      SIGNATURE_API_KEY: ${SIGNATURE_API_KEY}
+      BUYER_OUTREACH_API_URL: ${BUYER_OUTREACH_API_URL}
+      BUYER_OUTREACH_API_KEY: ${BUYER_OUTREACH_API_KEY}
+      CLOSING_API_URL: ${CLOSING_API_URL}
+      CLOSING_API_KEY: ${CLOSING_API_KEY}
+      OUTBOX_WEBHOOK_URL: ${OUTBOX_WEBHOOK_URL}
+      OUTBOX_WEBHOOK_API_KEY: ${OUTBOX_WEBHOOK_API_KEY}
+    ports:
+      - "${PORT:-3000}:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/health').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+
+  worker:
+    build: .
+    command: npm run worker
+    restart: unless-stopped
+    environment:
+      <<: *tradewind_environment
+      WORKER_POLL_INTERVAL_MS: ${WORKER_POLL_INTERVAL_MS}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+
+volumes:
+  postgres_data:

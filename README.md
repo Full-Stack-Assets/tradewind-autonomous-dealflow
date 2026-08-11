@@ -24,13 +24,16 @@ All committed fixture identities, addresses, buyers, and transactions are explic
 ## Commands
 
 ```bash
-npm install
+npm ci
 npm test
 npm run typecheck
 npm run eval
 npm run smoke
 npm run migrate -- --check
 npm run verify:release
+npm run preflight:providers
+# Explicit live network opt-in; retrieves source metadata/counts and RI directory links only.
+npm run preflight:sources:live -- --allow-network
 ```
 
 Runtime commands:

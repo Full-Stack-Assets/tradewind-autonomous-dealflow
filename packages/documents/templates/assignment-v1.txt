@@ -1,0 +1,5 @@
+TRADEWIND ASSIGNMENT PACKAGE — SYNTHETIC TEMPLATE
+Property: {{propertyAddress}}
+Assignor: {{assignorName}}
+Assignee: {{assigneeName}}
+Assignment price: {{money:assignmentPriceCents}}

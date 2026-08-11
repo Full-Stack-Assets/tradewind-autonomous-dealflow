@@ -1,0 +1,29 @@
+{
+  "name": "tradewind-autonomous-dealflow",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --experimental-strip-types --test tests/*.test.ts",
+    "typecheck": "tsc --noEmit",
+    "smoke": "node --experimental-strip-types apps/worker/src/smoke.ts",
+    "eval": "node --experimental-strip-types evals/run.ts",
+    "api": "node --experimental-strip-types apps/api/src/main.ts",
+    "worker": "node --experimental-strip-types apps/worker/src/main.ts",
+    "preflight:providers": "node --experimental-strip-types apps/worker/src/provider-preflight.ts",
+    "preflight:sources:live": "node --experimental-strip-types apps/worker/src/live-source-preflight.ts",
+    "migrate": "node --experimental-strip-types scripts/migrate.ts",
+    "verify:release": "node --experimental-strip-types scripts/verify-release.ts"
+  },
+  "dependencies": {
+    "@openai/agents": "0.14.1",
+    "zod": "4.0.0",
+    "pg": "8.22.0"
+  },
+  "devDependencies": {
+    "typescript": "7.0.2"
+  }
+}

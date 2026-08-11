@@ -1,0 +1,250 @@
+{
+  "generatedAt": "2026-08-11T18:44:24.590Z",
+  "passed": true,
+  "caseCount": 10,
+  "passedCount": 10,
+  "failedCount": 0,
+  "results": [
+    {
+      "name": "happy path",
+      "passed": true,
+      "observedTerminalState": "ARCHIVED",
+      "eventSequence": [
+        "PropertyIngested",
+        "LeadQualified",
+        "EnrichmentCompleted",
+        "OutreachStarted",
+        "SellerQualified",
+        "OfferGenerated",
+        "TermsAccepted",
+        "AcquisitionExecuted",
+        "BuyersMatched",
+        "BuyerSelected",
+        "AssignmentExecuted",
+        "ClosingConfirmed",
+        "FeeRecorded",
+        "DealArchived"
+      ],
+      "providerOperations": [
+        "enrich",
+        "converse",
+        "execute:acquisition",
+        "selectBuyer",
+        "execute:assignment",
+        "confirmClosing"
+      ],
+      "invariantFailures": [],
+      "durationMs": 5
+    },
+    {
+      "name": "unqualified lead",
+      "passed": true,
+      "observedTerminalState": "EXCEPTION",
+      "eventSequence": [
+        "PropertyIngested"
+      ],
+      "providerOperations": [],
+      "invariantFailures": [],
+      "durationMs": 0
+    },
+    {
+      "name": "missing mortgage fact",
+      "passed": true,
+      "observedTerminalState": "ARCHIVED",
+      "eventSequence": [
+        "PropertyIngested",
+        "LeadQualified",
+        "EnrichmentCompleted",
+        "OutreachStarted",
+        "SellerQualified",
+        "OfferGenerated",
+        "TermsAccepted",
+        "AcquisitionExecuted",
+        "BuyersMatched",
+        "BuyerSelected",
+        "AssignmentExecuted",
+        "ClosingConfirmed",
+        "FeeRecorded",
+        "DealArchived"
+      ],
+      "providerOperations": [
+        "enrich",
+        "converse",
+        "execute:acquisition",
+        "selectBuyer",
+        "execute:assignment",
+        "confirmClosing"
+      ],
+      "invariantFailures": [],
+      "durationMs": 3
+    },
+    {
+      "name": "enrichment transient failure/retry",
+      "passed": true,
+      "observedTerminalState": "ARCHIVED",
+      "eventSequence": [
+        "PropertyIngested",
+        "LeadQualified",
+        "EnrichmentCompleted",
+        "OutreachStarted",
+        "SellerQualified",
+        "OfferGenerated",
+        "TermsAccepted",
+        "AcquisitionExecuted",
+        "BuyersMatched",
+        "BuyerSelected",
+        "AssignmentExecuted",
+        "ClosingConfirmed",
+        "FeeRecorded",
+        "DealArchived"
+      ],
+      "providerOperations": [
+        "enrich",
+        "converse",
+        "execute:acquisition",
+        "selectBuyer",
+        "execute:assignment",
+        "confirmClosing"
+      ],
+      "invariantFailures": [],
+      "durationMs": 2
+    },
+    {
+      "name": "seller exception/resume",
+      "passed": true,
+      "observedTerminalState": "ARCHIVED",
+      "eventSequence": [
+        "PropertyIngested",
+        "LeadQualified",
+        "EnrichmentCompleted",
+        "OutreachStarted",
+        "SellerQualified",
+        "OfferGenerated",
+        "TermsAccepted",
+        "AcquisitionExecuted",
+        "BuyersMatched",
+        "BuyerSelected",
+        "AssignmentExecuted",
+        "ClosingConfirmed",
+        "FeeRecorded",
+        "DealArchived"
+      ],
+      "providerOperations": [
+        "enrich",
+        "converse",
+        "execute:acquisition",
+        "selectBuyer",
+        "execute:assignment",
+        "confirmClosing"
+      ],
+      "invariantFailures": [],
+      "durationMs": 3
+    },
+    {
+      "name": "no eligible buyer",
+      "passed": true,
+      "observedTerminalState": "EXCEPTION",
+      "eventSequence": [
+        "PropertyIngested",
+        "LeadQualified",
+        "EnrichmentCompleted",
+        "OutreachStarted",
+        "SellerQualified",
+        "OfferGenerated",
+        "TermsAccepted",
+        "AcquisitionExecuted"
+      ],
+      "providerOperations": [
+        "enrich",
+        "converse",
+        "execute:acquisition"
+      ],
+      "invariantFailures": [],
+      "durationMs": 1
+    },
+    {
+      "name": "duplicate run/idempotency",
+      "passed": true,
+      "observedTerminalState": "ARCHIVED",
+      "eventSequence": [
+        "PropertyIngested",
+        "LeadQualified",
+        "EnrichmentCompleted",
+        "OutreachStarted",
+        "SellerQualified",
+        "OfferGenerated",
+        "TermsAccepted",
+        "AcquisitionExecuted",
+        "BuyersMatched",
+        "BuyerSelected",
+        "AssignmentExecuted",
+        "ClosingConfirmed",
+        "FeeRecorded",
+        "DealArchived"
+      ],
+      "providerOperations": [
+        "enrich",
+        "converse",
+        "execute:acquisition",
+        "selectBuyer",
+        "execute:assignment",
+        "confirmClosing"
+      ],
+      "invariantFailures": [],
+      "durationMs": 2
+    },
+    {
+      "name": "document tamper detection",
+      "passed": true,
+      "observedTerminalState": "ARTIFACT_VERIFIED",
+      "eventSequence": [],
+      "providerOperations": [],
+      "invariantFailures": [],
+      "durationMs": 1
+    },
+    {
+      "name": "source duplicate suppression",
+      "passed": true,
+      "observedTerminalState": "HEALTHY",
+      "eventSequence": [],
+      "providerOperations": [
+        "fetchPage",
+        "fetchPage"
+      ],
+      "invariantFailures": [],
+      "durationMs": 0
+    },
+    {
+      "name": "outbox exactly-once publication",
+      "passed": true,
+      "observedTerminalState": "ARCHIVED",
+      "eventSequence": [
+        "PropertyIngested",
+        "LeadQualified",
+        "EnrichmentCompleted",
+        "OutreachStarted",
+        "SellerQualified",
+        "OfferGenerated",
+        "TermsAccepted",
+        "AcquisitionExecuted",
+        "BuyersMatched",
+        "BuyerSelected",
+        "AssignmentExecuted",
+        "ClosingConfirmed",
+        "FeeRecorded",
+        "DealArchived"
+      ],
+      "providerOperations": [
+        "enrich",
+        "converse",
+        "execute:acquisition",
+        "selectBuyer",
+        "execute:assignment",
+        "confirmClosing",
+        "outbox.publish"
+      ],
+      "invariantFailures": [],
+      "durationMs": 10
+    }
+  ]
+}

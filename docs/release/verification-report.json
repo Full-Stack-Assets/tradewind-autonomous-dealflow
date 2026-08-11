@@ -1,0 +1,97 @@
+{
+  "generatedAt": "2026-08-11T18:44:25.195Z",
+  "commit": "0f97674724aac415037bb4372e654200d4882f9c",
+  "passed": true,
+  "gateCount": 9,
+  "passedCount": 9,
+  "failedCount": 0,
+  "gates": [
+    {
+      "name": "unit and acceptance tests",
+      "passed": true,
+      "command": "npm test",
+      "exitCode": 0,
+      "durationMs": 1357,
+      "stdoutTail": "I, and archival (83.571469ms)\n✔ injects secure canonical headers and maps all provider responses (1.84026ms)\n✔ rejects missing configuration before network access and redacts provider failures (0.558258ms)\n✔ requires explicit network opt-in before source probing (0.939703ms)\n✔ probes official MA and RI source health without retrieving parcel attributes (13.624417ms)\n✔ maps official MassGIS fields while preserving unknown facts and raw attributes (4.061464ms)\n✔ filters incompatible buyers before ranking (0.805735ms)\n✔ adapts a node-postgres pool to the narrow SQL client contract (1.515417ms)\n✔ live OpenAI seller provider rejects explicit missing API key before network access (1.506824ms)\n✔ uses the balanced GPT-5.6 Terra seller model by default (0.142471ms)\n✔ rolls back checkpoint, event, and outbox together when a transaction fails (1.633333ms)\n✔ commits checkpoint, event, and outbox atomically on success (0.380454ms)\n✔ enforces optimistic checkpoint versions (0.326834ms)\n✔ claims runnable work with a lease and does not double-claim it (0.763502ms)\n✔ PostgreSQL runnable claims advance workflow-run and checkpoint versions together (11.317886ms)\n✔ releasing a PostgreSQL workflow lease keeps workflow-run and checkpoint versions synchronized (1.017529ms)\n✔ PostgreSQL readiness verifies PostGIS and migrated core tables rather than connection alone (0.750593ms)\n✔ PostgreSQL readiness fails closed when PostGIS or migrations are unavailable (0.306525ms)\n✔ defines the required PostgreSQL/PostGIS persistence schema (3.359482ms)\n✔ provider readiness reports configuration without leaking values or claiming live verification (1.384854ms)\n✔ provider readiness identifies exact missing variables and treats whitespace as absent (0.249149ms)\n✔ provider preflight writes only the safe readiness report (0.28986ms)\n✔ retries transient failures but not permanent failures (1.100692ms)\n✔ opens, probes half-open, and closes a circuit breaker (0.472511ms)\n✔ returns the original result for duplicate idempotency keys (0.448324ms)\n✔ deterministic providers return structured lifecycle results (1.626503ms)\n✔ normalizes synthetic MA source with lineage and integer-cent money (0.810732ms)\n✔ scores the synthetic lead deterministically (0.72825ms)\n✔ packages a reproducible Node 22 and PostGIS runtime without embedded secrets (15.600108ms)\n✔ includes architecture, activation, recovery, and evidence runbooks with explicit verification boundaries (13.703304ms)\n✔ parses the official RI municipality directory into a provider-neutral registry (15.611434ms)\n✔ parses the current RI.gov list layout and preserves municipalities with tax-only sources (0.704625ms)\n✔ parses the current RI.gov list markup and preserves municipalities with tax-only sources (0.40436ms)\n✔ offline smoke returns an archived transaction summary (1.627624ms)\n✔ persists cursors, suppresses duplicate snapshots, and recovers source health (1.976402ms)\n✔ system runtime emits UTC timestamps and collision-resistant prefixed ids (1.198297ms)\n✔ records counters, durations, workflow state, and source health in immutable snapshots (2.605504ms)\n✔ rejects invalid metric observations (0.570947ms)\n✔ creates an OpenAI GA realtime client-secret session without exposing the server key (1.299928ms)\n✔ creates an authorized ElevenLabs signed WebSocket session (0.459241ms)\n✔ voice providers fail closed when credentials or agent configuration are missing (0.374165ms)\n✔ claims only available workflows, resumes them, releases leases, and publishes each outbox row once (29.70725ms)\n✔ returns failed publications to the pending queue with bounded retry metadata (0.652608ms)\n✔ moves to EXCEPTION and stops downstream work on provider failure (3.217071ms)\n✔ returns the same terminal result without duplicating events or provider calls (8.824568ms)\n✔ persists an exception and resumes without repeating completed stages (9.007409ms)\nℹ tests 62\nℹ suites 0\nℹ pass 62\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 890.915662\n",
+      "stderrTail": "npm warn Unknown env config \"http-proxy\". This will stop working in the next major version of npm.\nnpm notice\nnpm notice New minor version of npm available! 11.9.0 -> 11.19.0\nnpm notice Changelog: https://github.com/npm/cli/releases/tag/v11.19.0\nnpm notice To update run: npm install -g npm@11.19.0\nnpm notice\n"
+    },
+    {
+      "name": "TypeScript typecheck",
+      "passed": true,
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "durationMs": 360,
+      "stdoutTail": "\n> tradewind-autonomous-dealflow@0.1.0 typecheck\n> tsc --noEmit\n\n",
+      "stderrTail": "npm warn Unknown env config \"http-proxy\". This will stop working in the next major version of npm.\n"
+    },
+    {
+      "name": "evaluation matrix",
+      "passed": true,
+      "command": "npm run eval",
+      "exitCode": 0,
+      "durationMs": 318,
+      "stdoutTail": "\n> tradewind-autonomous-dealflow@0.1.0 eval\n> node --experimental-strip-types evals/run.ts\n\n{\"passed\":true,\"caseCount\":10,\"passedCount\":10,\"failedCount\":0}\n",
+      "stderrTail": "npm warn Unknown env config \"http-proxy\". This will stop working in the next major version of npm.\n"
+    },
+    {
+      "name": "offline lifecycle smoke",
+      "passed": true,
+      "command": "npm run smoke",
+      "exitCode": 0,
+      "durationMs": 300,
+      "stdoutTail": "\n> tradewind-autonomous-dealflow@0.1.0 smoke\n> node --experimental-strip-types apps/worker/src/smoke.ts\n\n{\n  \"state\": \"ARCHIVED\",\n  \"workflowId\": \"workflow-0001\",\n  \"propertyId\": \"property-0001\",\n  \"buyerId\": \"buyer-001\",\n  \"assignmentFeeCents\": 2000000,\n  \"closingStatus\": \"confirmed\",\n  \"eventCount\": 14,\n  \"providerCallCount\": 6\n}\n",
+      "stderrTail": "npm warn Unknown env config \"http-proxy\". This will stop working in the next major version of npm.\n"
+    },
+    {
+      "name": "migration check command",
+      "passed": true,
+      "command": "npm run migrate -- --check",
+      "exitCode": 0,
+      "durationMs": 272,
+      "stdoutTail": "\n> tradewind-autonomous-dealflow@0.1.0 migrate\n> node --experimental-strip-types scripts/migrate.ts --check\n\n{\"migration\":\"migrations/0001_core.sql\",\"status\":\"valid\"}\n",
+      "stderrTail": "npm warn Unknown env config \"http-proxy\". This will stop working in the next major version of npm.\n"
+    },
+    {
+      "name": "git diff --check",
+      "passed": true,
+      "command": "git diff --check",
+      "exitCode": 0,
+      "durationMs": 5,
+      "stdoutTail": "",
+      "stderrTail": ""
+    },
+    {
+      "name": "domain import boundary",
+      "passed": true,
+      "command": "domain import boundary",
+      "exitCode": 0,
+      "durationMs": 0,
+      "stdoutTail": "No forbidden domain imports found.",
+      "stderrTail": ""
+    },
+    {
+      "name": "forbidden secret scan",
+      "passed": true,
+      "command": "forbidden secret scan",
+      "exitCode": 0,
+      "durationMs": 0,
+      "stdoutTail": "No credential-like material found.",
+      "stderrTail": ""
+    },
+    {
+      "name": "migration schema scan",
+      "passed": true,
+      "command": "migration schema scan",
+      "exitCode": 0,
+      "durationMs": 0,
+      "stdoutTail": "PostGIS, workflow, event, provider, outbox, spatial, and lease primitives found.",
+      "stderrTail": ""
+    }
+  ],
+  "externalVerification": {
+    "postgres": "unexecuted live PostgreSQL/PostGIS verification",
+    "openai": "unexecuted live-account verification",
+    "elevenlabs": "unexecuted live-account verification",
+    "businessProviders": "unexecuted live-account verification; deterministic and HTTP contract tests executed locally"
+  }
+}
