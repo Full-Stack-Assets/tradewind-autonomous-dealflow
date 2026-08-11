@@ -40,8 +40,12 @@
 | Outbox webhook publisher | Yes | Yes | No | Missing endpoint and API key. |
 | Release source ZIP and full Git bundle | Yes | Yes | N/A | A committed clean branch head was packaged; ZIP integrity, bundle completeness, and both SHA-256 checksums were independently verified. Exact artifact commit, filenames, and checksums are carried by the companion checksum manifest and final handoff. |
 | GitHub repository and canonical source publication | Yes | Yes | Yes | Private repository `Full-Stack-Assets/tradewind-autonomous-dealflow` is active. Connector import commit `f775570` records local release `afaa270`; its root tree `f9f4e22` exactly matches the local canonical root tree. Original Git history was not preserved. |
-| Hosted GitHub Actions CI | Yes | Yes | Pending | `.github/workflows/ci.yml` is hosted and defines Node 22 verification plus a Docker build. The source-import push run is not observable through the installed connector because its workflow-run endpoint exposes PR-triggered runs only; an activation-evidence PR is being used for live CI verification. |
+| Hosted GitHub Actions CI | Yes | Yes | Yes | PR head `7c30687` completed Actions run `31531581399` successfully. The `verify` job passed `npm ci`, tests, typecheck, evals, and the release verifier; the independent `container` job built the Docker image successfully. |
 
 ## Current candidate verification
 
 The exact canonical local release `afaa270f428f6b06579ff9d5d8c1a5f242e620e0` passed a lockfile-driven install, 62/62 tests, typecheck, deterministic smoke, 10/10 evals, and 9/9 integrated release gates. The generated verification report intentionally retains external PostgreSQL and provider gates as unexecuted. The production-code candidate remains `31696ca7ba57c60aea6e9863da2395f44e8d77e0`; the intervening commits update evidence and documentation only.
+
+## Hosted CI verification
+
+GitHub Actions run `31531581399` verified hosted PR head `7c30687113d5567d1f7f68af7d98f2eb909b107a`. Both jobs completed with a `success` conclusion: `verify` ran the lockfile install, test suite, TypeScript check, evaluations, and integrated release verifier; `container` completed the repository Docker build. This verifies the hosted source and build contracts, not any credentialed provider or live PostgreSQL operation.
