@@ -1,0 +1,13 @@
+.git
+.github
+.worktrees
+node_modules
+coverage
+dist
+.env
+.env.*
+*.log
+*.bundle
+*.zip
+evals/results/latest.json
+docs/release/verification-report.json
