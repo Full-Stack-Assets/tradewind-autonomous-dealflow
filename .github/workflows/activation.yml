@@ -1,0 +1,60 @@
+name: activation
+
+on:
+  push:
+    branches: [main, codex/release-completion]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-recovered-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Fetch recovered verified source
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .recovered/source
+          curl --fail --location --retry 3 --output .recovered/release.zip 'https://drive.usercontent.google.com/download?id=1nPehlHOiJDJrFIRineAWb3HtQZMWuNrm&export=download&confirm=t'
+          echo '2dd00ec6c78460d502a338681080714c04b17b29a13d5ff2341155fd8259f6fd  .recovered/release.zip' | sha256sum -c -
+          unzip -q .recovered/release.zip -d .recovered/source
+      - name: Install dependencies
+        working-directory: .recovered/source
+        run: npm install --no-audit --no-fund
+      - name: Test
+        working-directory: .recovered/source
+        run: npm test
+      - name: Typecheck
+        working-directory: .recovered/source
+        run: npm run typecheck
+      - name: Smoke
+        working-directory: .recovered/source
+        run: npm run smoke
+      - name: Evaluations
+        working-directory: .recovered/source
+        run: npm run eval
+      - name: Release verifier
+        working-directory: .recovered/source
+        run: npm run verify:release
+
+  container-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch recovered verified source
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .recovered/source
+          curl --fail --location --retry 3 --output .recovered/release.zip 'https://drive.usercontent.google.com/download?id=1nPehlHOiJDJrFIRineAWb3HtQZMWuNrm&export=download&confirm=t'
+          echo '2dd00ec6c78460d502a338681080714c04b17b29a13d5ff2341155fd8259f6fd  .recovered/release.zip' | sha256sum -c -
+          unzip -q .recovered/release.zip -d .recovered/source
+      - name: Docker build
+        working-directory: .recovered/source
+        run: docker build --tag tradewind-autonomous-dealflow:ci .
