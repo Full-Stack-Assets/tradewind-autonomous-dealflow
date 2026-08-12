@@ -2,7 +2,7 @@ import { createServer, type IncomingMessage, type Server, type ServerResponse } 
 import type { SourceHealth } from '../../../packages/ingestion/src/source-runner.ts';
 import type { TransactionalDealFlowStore } from '../../../packages/persistence/src/contracts.ts';
 import type { MetricsRegistry } from '../../../packages/telemetry/src/metrics.ts';
-import { operatorHtml } from './operator-html.ts';
+import { reviewOperatorHtml } from './review-operator-html.ts';
 
 export interface ReadinessResult {
   ready: boolean;
@@ -134,7 +134,7 @@ export function createApiServer(dependencies: ApiDependencies): ApiServer {
       return;
     }
     if (method === 'GET' && path === '/') {
-      sendHtml(response, 200, operatorHtml());
+      sendHtml(response, 200, reviewOperatorHtml());
       return;
     }
 
