@@ -72,9 +72,10 @@ test('serves health, readiness, operator HTML, simulations, workflow data, event
     assert.equal(home.status, 200);
     assert.ok(home.headers.get('content-type')?.startsWith('text/html'));
     const html = await home.text();
-    assert.ok(html.includes('Lifecycle'));
-    assert.ok(html.includes('Source health'));
-    assert.ok(html.includes('Exceptions'));
+    assert.ok(html.includes('Autonomous Real Estate Acquisition Operations'));
+    assert.ok(html.includes('data-action="run-simulation"'));
+    assert.ok(html.includes('/v1/workflows'));
+    assert.ok(html.includes('Simulation-only review surface'));
 
     const before = await fetch(`${url}/v1/workflows`);
     assert.deepEqual(await json(before), { workflows: [] });
