@@ -9,7 +9,7 @@ test('Tradewind review interface preserves provenance and authority boundaries',
   assert.match(html, /Synthetic simulation only/);
   assert.match(html, /\/v1\/workflows/);
   assert.match(html, /\/v1\/sources/);
-  assert.doesNotMatch(html, />1,248</);
-  assert.doesNotMatch(html, />862</);
-  assert.doesNotMatch(html, />386</);
+  assert.equal(/>1,248</.test(html), false);
+  assert.equal(/>862</.test(html), false);
+  assert.equal(/>386</.test(html), false);
 });
