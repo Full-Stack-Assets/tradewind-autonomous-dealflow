@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { operatorHtml } from '../apps/api/src/operator-html.ts';
+import { reviewOperatorHtml } from '../apps/api/src/review-operator-html.ts';
 
 test('Tradewind review interface preserves provenance and authority boundaries', () => {
-  const html = operatorHtml();
+  const html = reviewOperatorHtml();
   assert.match(html, /Post-merge review snapshot/);
   assert.match(html, /Interface review only/);
   assert.match(html, /Synthetic simulation only/);
